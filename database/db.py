@@ -152,7 +152,7 @@ def get_employees(db_path=None):
     con = _connect(db_path)
     try:
         return [_dict(r) for r in con.execute(
-            "SELECT employee_id, name, role, available_hours"
+            "SELECT employee_id, name, role, available_hours, email"
             " FROM employees ORDER BY employee_id")]
     finally:
         con.close()
@@ -163,7 +163,7 @@ def get_employee(employee_id, db_path=None):
     con = _connect(db_path)
     try:
         return _dict(con.execute(
-            "SELECT employee_id, name, role, available_hours"
+            "SELECT employee_id, name, role, available_hours, email"
             " FROM employees WHERE employee_id = ?", (employee_id,)).fetchone())
     finally:
         con.close()
